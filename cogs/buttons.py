@@ -55,7 +55,7 @@ class Raids(commands.Cog):
             
             if res.component.id == "buy_builder":
                 if data[str(res.guild.id)]["gold storage"] - (5000 * data[str(res.guild.id)]["builders"]) >= 0:
-                    data[str(res.guild.id)]["gold storage"] - (5000 * data[str(res.guild.id)]["builders"])
+                    data[str(res.guild.id)]["gold storage"] -= (5000 * data[str(res.guild.id)]["builders"])
                     data[str(res.guild.id)]["builders"] += 1
                     Functions.write(self, "data", data, f)
                     await res.channel.send(embed=discord.Embed(description=f'{res.author.mention} Purchased **+1 Builder**', color=65535), delete_after=2)
