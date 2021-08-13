@@ -76,9 +76,7 @@ class Functions(commands.Cog):
                 for _ in range(round(10 * int(data[str(target)]["defense"]))):
                     arr.append(str(target))
 
-                winner = random.choice(arr)
-
-                if winner == str(guild.id):
+                if random.choice(arr) == str(guild.id):
                     data[str(guild.id)]["army"] += 2
                     data[str(guild.id)]["gold storage"] += 500
                     data[str(guild.id)]["elixir storage"] += 1000
