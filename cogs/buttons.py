@@ -66,9 +66,6 @@ class Raids(commands.Cog):
 
             if res.component.id == 'start_raid':
                 raid = Functions.raidSystem(self, res.guild)
-                data[str(res.guild.id)]["raid_timer"] = (time.time() + 900)
-                Functions.write(self, "data", data, f)
-
                 channel = self.client.get_channel(int(data[str(raid[0])]["raid_channel_id"]))
                 await channel.send(embed=discord.Embed(title=f'You Won a Raid!', description=f'**Results**\n+500 Gold\n+1000 Elixir\n+2 Defense/Army Level', color=65535))
 

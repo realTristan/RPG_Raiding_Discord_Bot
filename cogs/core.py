@@ -58,7 +58,6 @@ class Core(commands.Cog):
 
 
 
-
     @commands.command()
     @has_permissions(manage_messages=True)
     async def upgrade(self, ctx):
@@ -84,9 +83,6 @@ class Core(commands.Cog):
                 Button(style=ButtonStyle.blue, label="Elixir Storage", custom_id="elixir_up"),
                 Button(style=ButtonStyle.red, label="Defense", custom_id="def_up"),
                 Button(style=ButtonStyle.red, label="Army", custom_id="army_up")]])
-
-
-
 
 
 

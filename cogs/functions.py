@@ -65,6 +65,7 @@ class Functions(commands.Cog):
     def raidSystem(self, guild):
         with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
             data=json.load(f)
+            
             target=random.choice(list(data))
             if target == str(guild.id):
                 Functions.raidSystem(self, guild)
@@ -76,6 +77,7 @@ class Functions(commands.Cog):
                 for _ in range(round(10 * int(data[str(target)]["defense"]))):
                     arr.append(str(target))
 
+                data[str(guild.id)]["raid_timer"] = (time.time() + 900)
                 if random.choice(arr) == str(guild.id):
                     data[str(guild.id)]["army"] += 2
                     data[str(guild.id)]["gold storage"] += 500
@@ -83,8 +85,8 @@ class Functions(commands.Cog):
                     
                     data[str(target)]["elixir storage"] -= 1200
                     data[str(target)]["gold storage"] -= 600
-
                     Functions.numCheck(self, guild)
+                    Functions.write(self, "data", data, f)
                     return guild.id, target
 
                 else:
@@ -95,8 +97,10 @@ class Functions(commands.Cog):
                     data[str(guild.id)]["elixir storage"] -= 1200
                     data[str(guild.id)]["gold storage"] -= 600
 
+                    Functions.numCheck(self, guild)
                     Functions.write(self, "data", data, f)
                     return target, guild.id
+                
 
 
 
