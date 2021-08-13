@@ -38,18 +38,21 @@ class Core(commands.Cog):
             data=json.load(f); await ctx.message.delete()
             embed=discord.Embed(title='Select an item to purchase', color=65535)
             embed.add_field(name=f'Buy a Builder [{5000 * data[str(ctx.message.guild.id)]["builders"]}$]', value='Amount: **+1**')
+            embed.add_field(name='\u200b', value='\u200b')
             embed.add_field(name='Buy Speed Potion [2200$]', value='Amount: **+1**')
             embed.add_field(name='Buy Gold Storage [1700$]', value='Amount: **+1 lvl**')
+            embed.add_field(name='\u200b', value='\u200b')
             embed.add_field(name='Buy Elixir Storage [1700$]', value='Amount: **+1 lvl**')
             embed.add_field(name='Buy Defenses [1300$]', value='Amount: **+1 lvl**')
+            embed.add_field(name='\u200b', value='\u200b')
             embed.add_field(name='Buy Army Troops [1300$]', value='Amount: **+1 lvl**')
             await ctx.send(
             embed=embed,
             components=[
             [Button(style=ButtonStyle.blue, label="Builder", custom_id="buy_builder"),
             Button(style=ButtonStyle.blue, label="Speed Potion", custom_id="buy_speed_pot"),
-            Button(style=ButtonStyle.blue, label="Gold Storage", custom_id="buy_gold_up"),
-            Button(style=ButtonStyle.blue, label="Elixir Storage", custom_id="buy_elixir_up"),
+            Button(style=ButtonStyle.blue, label="Gold Storage", custom_id="buy_gold_up")],
+            [Button(style=ButtonStyle.blue, label="Elixir Storage", custom_id="buy_elixir_up"),
             Button(style=ButtonStyle.blue, label="Defense", custom_id="buy_def_up"),
             Button(style=ButtonStyle.blue, label="Army", custom_id="buy_army_up")]])
 
