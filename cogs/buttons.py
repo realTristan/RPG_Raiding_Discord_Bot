@@ -62,7 +62,7 @@ class Raids(commands.Cog):
                     await res.channel.send(embed=discord.Embed(description=f'{res.author.mention} Purchased **+1 Builder**', color=65535), delete_after=2)
                     await res.respond(type=InteractionType.ChannelMessageWithSource, content=f"{res.author.mention} **Purchased a Builder!**")
                 else:
-                    await res.respond(type=InteractionType.ChannelMessageWithSource, content=f"{res.author.mention} **Your Guild doesn't have enough coins**")
+                    await res.respond(type=InteractionType.ChannelMessageWithSource, content=f"{res.author.mention} **Your Guild doesn't have enough gold**")
 
             if res.component.id == 'start_raid':
                 raid = Functions.raidSystem(self, res.guild)

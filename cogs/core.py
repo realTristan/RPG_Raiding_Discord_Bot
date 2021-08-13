@@ -40,12 +40,12 @@ class Core(commands.Cog):
             embed.add_field(name=f'Buy a Builder [{5000 * data[str(ctx.message.guild.id)]["builders"]}$]', value='Amount: **+1**')
             embed.add_field(name='\u200b', value='\u200b')
             embed.add_field(name='Buy Speed Potion [2200$]', value='Amount: **+1**')
-            embed.add_field(name='Buy Gold Storage [1700$]', value='Amount: **+1 lvl**')
+            embed.add_field(name=' ‎\nBuy Gold Storage [1700$]', value='Amount: **+1 lvl**')
             embed.add_field(name='\u200b', value='\u200b')
-            embed.add_field(name='Buy Elixir Storage [1700$]', value='Amount: **+1 lvl**')
-            embed.add_field(name='Buy Defenses [1300$]', value='Amount: **+1 lvl**')
+            embed.add_field(name=' ‎\nBuy Elixir Storage [1700$]', value='Amount: **+1 lvl**')
+            embed.add_field(name=' ‎\nBuy Defenses [1300$]', value='Amount: **+1 lvl**')
             embed.add_field(name='\u200b', value='\u200b')
-            embed.add_field(name='Buy Army Troops [1300$]', value='Amount: **+1 lvl**')
+            embed.add_field(name=' ‎\nBuy Army Troops [1300$]', value='Amount: **+1 lvl**')
             await ctx.send(
             embed=embed,
             components=[
@@ -84,6 +84,26 @@ class Core(commands.Cog):
                 Button(style=ButtonStyle.blue, label="Elixir Storage", custom_id="elixir_up"),
                 Button(style=ButtonStyle.red, label="Defense", custom_id="def_up"),
                 Button(style=ButtonStyle.red, label="Army", custom_id="army_up")]])
+
+
+
+
+
+
+    @commands.command()
+    async def bank(self, ctx):
+        with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
+            data=json.load(f); await ctx.message.delete()
+            embed=discord.Embed(title=f"{ctx.message.guild.name}'s Bank", color=16776992)
+            embed.add_field(name='Gold', value=f'Amount: **{data[str(ctx.message.guild.id)]["gold storage"]}**\nLevel: **{data[str(ctx.message.guild.id)]["gold lvl"]}**')
+            embed.add_field(name='\u200b', value='\u200b')
+            embed.add_field(name='Elixir', value=f'Amount: **{data[str(ctx.message.guild.id)]["elixir storage"]}**\nLevel: **{data[str(ctx.message.guild.id)]["elixir lvl"]}**')
+            embed.add_field(name='‏‏‎ ‎\nArmy', value=f'Level: **{data[str(ctx.message.guild.id)]["army"]}**')
+            embed.add_field(name='\u200b', value='\u200b')
+            embed.add_field(name='‏‏‎ ‎\nDefenses', value=f'Level: **{data[str(ctx.message.guild.id)]["defense"]}**')
+            embed.add_field(name='‏‏‎ ‎\nBuilders', value=f'Amount: **{data[str(ctx.message.guild.id)]["builders"]}**')
+            await ctx.send(embed=embed)
+
 
 
 
