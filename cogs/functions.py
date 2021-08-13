@@ -26,8 +26,12 @@ class Functions(commands.Cog):
         with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
             data=json.load(f)
             for v in data[str(guild.id)]:
-                if int(v) < 0:
-                    data[str(guild.id)][v] = 0
+                try:
+                    if int(data[str(guild.id)][v]) < 0:
+                        data[str(guild.id)][v] = 0
+                except Exception as e:
+                    print(e)
+                    pass
             
             if data[str(guild.id)]["elixir storage"] > (data[str(guild.id)]["elixir lvl"]) * Functions.builders(self, guild):
                 data[str(guild.id)]["elixir storage"] = (data[str(guild.id)]["elixir lvl"]) * Functions.builders(self, guild)

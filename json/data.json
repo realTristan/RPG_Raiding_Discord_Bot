@@ -1,16 +1,16 @@
 {
     "782315340205391893": {
         "builders": 2,
-        "speed_potions": 983,
-        "up_timer": 1628879361.901551,
-        "up_name": "Defense",
-        "raid_timer": 1628868632.388406,
+        "speed_potions": 981,
+        "up_timer": 0,
+        "up_name": "Army",
+        "raid_timer": 0,
         "raid_channel_id": 874369847239266414,
-        "elixir storage": 8000,
-        "elixir lvl": 10,
-        "gold storage": 9500,
+        "elixir storage": 0,
+        "elixir lvl": 1,
+        "gold storage": 0,
         "gold lvl": 0,
-        "army": 12,
-        "defense": 2
+        "army": 1,
+        "defense": 1
     }
 }
