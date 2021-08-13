@@ -10,6 +10,7 @@ class Raids(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+
     @commands.Cog.listener()
     async def on_button_click(self, res):
         with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
