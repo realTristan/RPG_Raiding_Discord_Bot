@@ -20,14 +20,14 @@ class Core(commands.Cog):
             if timeLeft > 0:
                 await ctx.send(embed=discord.Embed(title=f'Raid Blocked ┃ {str(datetime.timedelta(seconds=int(timeLeft)))}', description=f"{ctx.author.mention} would you like to use a **Speed Potion? [1/{data[str(ctx.message.guild.id)]['speed_potions']}]**", color=65535),
                     components=[
-                    [Button(style=ButtonStyle.green, label="Yes", custom_id="yes_speed_pot"),
-                    Button(style=ButtonStyle.red, label="No", custom_id="no_speed_pot")]])
+                    [Button(style=ButtonStyle.green, label="Yes", custom_id="raid_speed_pot"),
+                    Button(style=ButtonStyle.red, label="No", custom_id="cancel")]])
             else:
                 await ctx.send(
                 embed=discord.Embed(title="Are you sure?", description=f'**Lord {ctx.author.mention}**, are you sure you want to start a raid?', color=16777215),
                 components=[
                 [Button(style=ButtonStyle.green, label="Start", custom_id="start_raid"),
-                Button(style=ButtonStyle.red, label="Cancel", custom_id="cancel_raid")]])
+                Button(style=ButtonStyle.red, label="Cancel", custom_id="cancel")]])
 
 
 
@@ -47,7 +47,7 @@ class Core(commands.Cog):
             embed=embed,
             components=[
             [Button(style=ButtonStyle.blue, label="Builder", custom_id="buy_builder"),
-            Button(style=ButtonStyle.blue, label="Speed Potion", custom_id="buy_speed_potion"),
+            Button(style=ButtonStyle.blue, label="Speed Potion", custom_id="buy_speed_pot"),
             Button(style=ButtonStyle.blue, label="Gold Storage", custom_id="buy_gold_up"),
             Button(style=ButtonStyle.blue, label="Elixir Storage", custom_id="buy_elixir_up"),
             Button(style=ButtonStyle.blue, label="Defense", custom_id="buy_def_up"),
@@ -68,8 +68,8 @@ class Core(commands.Cog):
                 if data[str(ctx.message.guild.id)]["speed_potions"] > 0:
                     await ctx.send(embed=discord.Embed(title=f'{upgrade} Upgrade in Progress ┃ {str(datetime.timedelta(seconds=int(timeLeft)))}', description=f"{ctx.author.mention} would you like to use a **Speed Potion? [1/{data[str(ctx.message.guild.id)]['speed_potions']}]**", color=65535),
                     components=[
-                    [Button(style=ButtonStyle.green, label="Yes", custom_id="yes_speed_pot"),
-                    Button(style=ButtonStyle.red, label="No", custom_id="no_speed_pot")]])
+                    [Button(style=ButtonStyle.green, label="Yes", custom_id="up_speed_pot"),
+                    Button(style=ButtonStyle.red, label="No", custom_id="cancel")]])
                     
                 else:
                     await ctx.send(embed=discord.Embed(title=f'{upgrade} Upgrade in Progress ┃ {str(datetime.timedelta(seconds=int(timeLeft)))}', color=65535))
