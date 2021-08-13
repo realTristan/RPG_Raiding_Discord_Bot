@@ -54,11 +54,14 @@ class Raids(commands.Cog):
                 await res.channel.send(embed=Functions.upgradeSystem(self, "army", res.message.guild))
             
             if res.component.id == "buy_builder":
-                if data[str(res.guild.id)]["gold storage"] - (5000 * data[str(res.guild.id)]["builders"]) > 0:
+                if data[str(res.guild.id)]["gold storage"] - (5000 * data[str(res.guild.id)]["builders"]) >= 0:
                     data[str(res.guild.id)]["gold storage"] - (5000 * data[str(res.guild.id)]["builders"])
                     data[str(res.guild.id)]["builders"] += 1
-                    await res.channel.send(embed=discord.Embed(description=f'{res.author.mention} Purchased **+1 Builder**', color=65535))
+                    Functions.write(self, "data", data, f)
+                    await res.channel.send(embed=discord.Embed(description=f'{res.author.mention} Purchased **+1 Builder**', color=65535), delete_after=2)
                     await res.respond(type=InteractionType.ChannelMessageWithSource, content=f"{res.author.mention} **Purchased a Builder!**")
+                else:
+                    await res.respond(type=InteractionType.ChannelMessageWithSource, content=f"{res.author.mention} **Your Guild doesn't have enough coins**")
 
             if res.component.id == 'start_raid':
                 raid = Functions.raidSystem(self, res.guild)
