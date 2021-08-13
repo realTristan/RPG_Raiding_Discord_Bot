@@ -54,7 +54,7 @@ class Functions(commands.Cog):
             data[str(guild.id)][upgrade] += amount
             data[str(guild.id)]['speed_potions'] -= 1
             data[str(guild.id)]['up_timer'] = 0
-
+            Functions.write(self, "data", data, f)
             return discord.Embed(title='Upgrade Success', description=f'Your Builders have upgraded your **{upgrade.replace("lvl", "storage")}** to level **{data[str(guild.id)][upgrade]}**', color=16777215)
             
 
