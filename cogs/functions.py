@@ -29,8 +29,7 @@ class Functions(commands.Cog):
                 try:
                     if int(data[str(guild.id)][v]) < 0:
                         data[str(guild.id)][v] = 0
-                except Exception as e:
-                    print(e)
+                except Exception:
                     pass
             
             if data[str(guild.id)]["elixir storage"] > (data[str(guild.id)]["elixir lvl"]) * Functions.builders(self, guild):
@@ -60,14 +59,14 @@ class Functions(commands.Cog):
             data[str(guild.id)]['up_timer'] = 0
             Functions.write(self, "data", data, f)
             return discord.Embed(title='Upgrade Success', description=f'Your Builders have upgraded your **{upgrade.replace("lvl", "storage")}** to level **{data[str(guild.id)][upgrade]}**', color=16777215)
-            
+
 
 
     def raidSystem(self, guild):
         with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
             data=json.load(f)
             target=random.choice(list(data))
-            if target == (guild.id):
+            if target == str(guild.id):
                 Functions.raidSystem(self, guild)
             else:
                 arr = []
