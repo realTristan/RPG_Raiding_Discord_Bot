@@ -61,8 +61,8 @@ class Core(commands.Cog):
     async def upgrade(self, ctx):
         with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
             data=json.load(f); await ctx.message.delete()
-            timeLeft = int(data[str(ctx.message.guild.id)]["up_timer"][0]) - time.time()
-            upgrade = data[str(ctx.message.guild.id)]["up_timer"][1]
+            timeLeft = int(data[str(ctx.message.guild.id)]["up_timer"]) - time.time()
+            upgrade = data[str(ctx.message.guild.id)]["up_name"]
 
             if timeLeft > 0:
                 if data[str(ctx.message.guild.id)]["speed_potions"] > 0:

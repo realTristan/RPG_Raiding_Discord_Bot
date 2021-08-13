@@ -17,8 +17,8 @@ class Raids(commands.Cog):
             data=json.load(f)
             if res.component.id == "gold_up":
                 await res.respond(type=InteractionType.ChannelMessageWithSource, content=f"{res.author.mention} **Started the Gold Storage Upgrade**")
-                data[str(res.guild.id)]["up_timer"][0] = (time.time() + (21600 / int(Functions.builders(self, res.message.guild))))
-                data[str(res.guild.id)]["up_timer"][1] = "Gold Storage"
+                data[str(res.guild.id)]["up_timer"] = (time.time() + (21600 / int(Functions.builders(self, res.message.guild))))
+                data[str(res.guild.id)]["up_name"] = "Gold Storage"
                 
                 Functions.write(self, "data", data, f); await res.message.delete()
                 await asyncio.sleep(21600 / int(Functions.builders(self, res.message.guild)))
@@ -26,8 +26,8 @@ class Raids(commands.Cog):
 
             if res.component.id == "elixir_up":
                 await res.respond(type=InteractionType.ChannelMessageWithSource, content=f"{res.author.mention} **Started the Elixir Storage Upgrade**")
-                data[str(res.guild.id)]["up_timer"][0] = (time.time() + (21600 / int(Functions.builders(self, res.message.guild))))
-                data[str(res.guild.id)]["up_timer"][1] = "Elixir Storage"
+                data[str(res.guild.id)]["up_timer"] = (time.time() + (21600 / int(Functions.builders(self, res.message.guild))))
+                data[str(res.guild.id)]["up_name"] = "Elixir Storage"
                 
                 Functions.write(self, "data", data, f); await res.message.delete()
                 await asyncio.sleep(21600 / int(Functions.builders(self, res.message.guild)))
@@ -36,8 +36,8 @@ class Raids(commands.Cog):
 
             if res.component.id == "def_up":
                 await res.respond(type=InteractionType.ChannelMessageWithSource, content=f"{res.author.mention} **Started the Defense Upgrade**")
-                data[str(res.guild.id)]["up_timer"][0] = (time.time() + (21600 / int(Functions.builders(self, res.message.guild))))
-                data[str(res.guild.id)]["up_timer"][1] = "Defense"
+                data[str(res.guild.id)]["up_timer"] = (time.time() + (21600 / int(Functions.builders(self, res.message.guild))))
+                data[str(res.guild.id)]["up_name"] = "Defense"
                 
                 Functions.write(self, "data", data, f); await res.message.delete()
                 await asyncio.sleep(21600 / int(Functions.builders(self, res.message.guild)))
@@ -46,16 +46,16 @@ class Raids(commands.Cog):
 
             if res.component.id == "army_up":
                 await res.respond(type=InteractionType.ChannelMessageWithSource, content=f"{res.author.mention} **Started the Army Upgrade**")
-                data[str(res.guild.id)]["up_timer"][0] = (time.time() + (21600 / int(Functions.builders(self, res.message.guild))))
-                data[str(res.guild.id)]["up_timer"][1] = "Army"
+                data[str(res.guild.id)]["up_timer"] = (time.time() + (21600 / int(Functions.builders(self, res.message.guild))))
+                data[str(res.guild.id)]["up_name"] = "Army"
                 
                 Functions.write(self, "data", data, f); await res.message.delete()
                 await asyncio.sleep(21600 / int(Functions.builders(self, res.message.guild)))
                 await res.channel.send(embed=Functions.upgradeSystem(self, "army", res.message.guild))
             
             if res.component.id == "buy_builder":
-                if data[str(res.guild.id)]["gold storage"][0] - (5000 * data[str(res.guild.id)]["builders"]) > 0:
-                    data[str(res.guild.id)]["gold storage"][0] - (5000 * data[str(res.guild.id)]["builders"])
+                if data[str(res.guild.id)]["gold storage"] - (5000 * data[str(res.guild.id)]["builders"]) > 0:
+                    data[str(res.guild.id)]["gold storage"] - (5000 * data[str(res.guild.id)]["builders"])
                     data[str(res.guild.id)]["builders"] += 1
                     await res.channel.send(embed=discord.Embed(description=f'{res.author.mention} Purchased **+1 Builder**', color=65535))
                     await res.respond(type=InteractionType.ChannelMessageWithSource, content=f"{res.author.mention} **Purchased a Builder!**")
@@ -72,10 +72,11 @@ class Raids(commands.Cog):
                 await channel.send(embed=discord.Embed(title=f'You Lost a Raid!', description=f'**Results**\n-600 Gold\n-1200 Elixir', color=65535))
 
             if res.component.id == 'up_speed_pot':
-                upgrade = data[str(res.guild.id)]["up_timer"][1]
-                await res.channel.send(embed=Functions.upgradeSystem(self, f"{upgrade.lower()}", res.message.guild))
+                await res.message.delete()
                 await res.respond(type=InteractionType.ChannelMessageWithSource, content=f"{res.author.mention} **used a Speed Potion!**")
-
+                upgrade = data[str(res.guild.id)]["up_name"]
+                await res.channel.send(embed=Functions.upgradeSystem(self, f"{upgrade.lower()}", res.message.guild))
+                
             if res.component.id == 'raid_speed_pot':
                 await res.message.delete()
                 data[str(res.guild.id)]['raid_timer'] = 0

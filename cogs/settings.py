@@ -29,13 +29,16 @@ class Settings(commands.Cog):
                     str(ctx.message.guild.id): {
                         "builders": 2,
                         "speed_potions": 0,
-                        "up_timer": [0, "none"],
+                        "up_timer": 0,
+                        "up_name": "None",
                         "raid_timer": 0,
                         "raid_channel_id": int(ctx.message.channel.id),
-                        "elixir storage": [0, 1], # elixir_storage[1] * 1000 is the max amount of storage
-                        "gold storage": [0, 1],
-                        "army": [0],
-                        "defense": [0]
+                        "elixir storage": 0,
+                        "elixir lvl": 0,
+                        "gold storage": 0,
+                        "gold lvl": 0,
+                        "army": 0,
+                        "defense": 0
                     }
                 })
                 self.write("data", data, f)

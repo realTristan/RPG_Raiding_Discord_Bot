@@ -22,6 +22,22 @@ class Functions(commands.Cog):
             return data[str(guild.id)]["builders"]
 
 
+    def numCheck(self, guild):
+        with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
+            data=json.load(f)
+            for v in data[str(guild.id)]:
+                if int(v) < 0:
+                    data[str(guild.id)][v] = 0
+            
+            if data[str(guild.id)]["elixir storage"] > (data[str(guild.id)]["elixir lvl"]) * Functions.builders(self, guild):
+                data[str(guild.id)]["elixir storage"] = (data[str(guild.id)]["elixir lvl"]) * Functions.builders(self, guild)
+
+            if data[str(guild.id)]["gold storage"] > (data[str(guild.id)]["gold lvl"]) * Functions.builders(self, guild):
+                data[str(guild.id)]["gold storage"] = (data[str(guild.id)]["gold lvl"]) * Functions.builders(self, guild)
+
+            Functions.write(self, "data", data, f)
+
+
 
     def levelSystem(self):
         random_levels = [1, 1, 1, 3, 4, 2, 1, 1, 1, 2, 2, 1, 3, 1, 0]
@@ -35,11 +51,11 @@ class Functions(commands.Cog):
         amount = Functions.levelSystem(self)
         with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
             data=json.load(f)
-            data[str(guild.id)][upgrade][len(data[str(guild.id)][upgrade]) - 1] += amount
+            data[str(guild.id)][upgrade] += amount
             data[str(guild.id)]['speed_potions'] -= 1
-            data[str(guild.id)]['up_timer'][0] = 0
+            data[str(guild.id)]['up_timer'] = 0
 
-            return discord.Embed(title='Upgrade Success', description=f'Your Builders have upgraded your **{upgrade}** to level **{data[str(guild.id)][upgrade.lower()][len(data[str(guild.id)][upgrade.lower()]) - 1]}**', color=16777215)
+            return discord.Embed(title='Upgrade Success', description=f'Your Builders have upgraded your **{upgrade.replace("lvl", "storage")}** to level **{data[str(guild.id)][upgrade]}**', color=16777215)
             
 
 
@@ -51,64 +67,32 @@ class Functions(commands.Cog):
                 Functions.raidSystem(self, guild)
             else:
                 arr = []
-                for _ in range(round(12 * int(data[str(guild.id)]["army"][0]))):
+                for _ in range(round(12 * int(data[str(guild.id)]["army"]))):
                     arr.append(str(guild.id))
 
-                for _ in range(round(10 * int(data[str(target)]["defense"][0]))):
+                for _ in range(round(10 * int(data[str(target)]["defense"]))):
                     arr.append(str(target))
 
                 winner = random.choice(arr)
 
                 if winner == str(guild.id):
-                    data[str(guild.id)]["army"][0] += 2
-
-                    if data[str(guild.id)]["gold storage"][0] + 500 > data[str(guild.id)]["gold storage"][1] * 10000:
-                        data[str(guild.id)]["gold storage"][0] = data[str(guild.id)]["gold storage"][1] * 10000
-                    else:
-                        data[str(guild.id)]["gold storage"][0] += 500
+                    data[str(guild.id)]["army"] += 2
+                    data[str(guild.id)]["gold storage"] += 500
+                    data[str(guild.id)]["elixir storage"] += 1000
                     
-                    if data[str(guild.id)]["elixir storage"][0] + 1000 > data[str(guild.id)]["elixir storage"][1] * 10000:
-                        data[str(guild.id)]["elixir storage"][0] = data[str(guild.id)]["elixir storage"][1] * 10000
-                    else:
-                        data[str(guild.id)]["elixir storage"][0] += 1000
-                    
+                    data[str(target)]["elixir storage"] -= 1200
+                    data[str(target)]["gold storage"] -= 600
 
-                    if data[str(target)]["elixir storage"][0] - 1200 <= 0:
-                        data[str(target)]["elixir storage"][0] = 0
-                    else:
-                        data[str(target)]["elixir storage"][0] -= 1200
-
-                    if data[str(target)]["gold storage"][0] - 600 <= 0:
-                        data[str(target)]["gold storage"][0] = 0
-                    else:
-                        data[str(target)]["gold storage"][0] -= 600
-
-                    Functions.write(self, "data", data, f)
+                    Functions.numCheck(self, guild)
                     return guild.id, target
 
                 else:
-                    data[str(target)]["defense"][0] += 2
-            
-                    if data[str(target)]["gold storage"][0] + 500 > data[str(target)]["gold storage"][1] * 10000:
-                        data[str(target)]["gold storage"][0] = data[str(target)]["gold storage"][1] * 10000
-                    else:
-                        data[str(target)]["gold storage"][0] += 500
+                    data[str(target)]["defense"] += 2
+                    data[str(target)]["gold storage"] += 500
+                    data[str(target)]["elixir storage"] += 1000
 
-                    if data[str(target)]["elixir storage"][0] + 1000 > data[str(target)]["elixir storage"][1] * 10000:
-                        data[str(target)]["elixir storage"][0] = data[str(target)]["elixir storage"][1] * 10000
-                    else:
-                        data[str(target)]["elixir storage"][0] += 1000
-                    
-
-                    if data[str(guild.id)]["elixir storage"][0] - 1200 <= 0:
-                        data[str(guild.id)]["elixir storage"][0] = 0
-                    else:
-                        data[str(guild.id)]["elixir storage"][0] -= 1200
-
-                    if data[str(guild.id)]["gold storage"][0] - 600 <= 0:
-                        data[str(guild.id)]["gold storage"][0] = 0
-                    else:
-                        data[str(guild.id)]["gold storage"][0] -= 600
+                    data[str(guild.id)]["elixir storage"] -= 1200
+                    data[str(guild.id)]["gold storage"] -= 600
 
                     Functions.write(self, "data", data, f)
                     return target, guild.id
