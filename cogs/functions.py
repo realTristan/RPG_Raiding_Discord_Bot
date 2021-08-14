@@ -32,11 +32,11 @@ class Functions(commands.Cog):
                 except Exception:
                     pass
             
-            if data[str(guild.id)]["elixir storage"] > (data[str(guild.id)]["elixir lvl"]) * Functions.builders(self, guild):
-                data[str(guild.id)]["elixir storage"] = (data[str(guild.id)]["elixir lvl"]) * Functions.builders(self, guild)
+            if data[str(guild.id)]["elixir storage"] > (data[str(guild.id)]["elixir lvl"]) * 10000:
+                data[str(guild.id)]["elixir storage"] = (data[str(guild.id)]["elixir lvl"]) * 10000
 
-            if data[str(guild.id)]["gold storage"] > (data[str(guild.id)]["gold lvl"]) * Functions.builders(self, guild):
-                data[str(guild.id)]["gold storage"] = (data[str(guild.id)]["gold lvl"]) * Functions.builders(self, guild)
+            if data[str(guild.id)]["gold storage"] > (data[str(guild.id)]["gold lvl"]) * 10000:
+                data[str(guild.id)]["gold storage"] = (data[str(guild.id)]["gold lvl"]) * 10000
 
             Functions.write(self, "data", data, f)
 

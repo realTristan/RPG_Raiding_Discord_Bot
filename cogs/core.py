@@ -39,7 +39,7 @@ class Core(commands.Cog):
             embed=discord.Embed(title='Select an item to purchase', color=65535)
             embed.add_field(name=f'Buy a Builder [{5000 * data[str(ctx.message.guild.id)]["builders"]}$]', value='Amount: **+1**')
             embed.add_field(name='\u200b', value='\u200b')
-            embed.add_field(name='Buy Speed Potion [2200$]', value='Amount: **+1**')
+            embed.add_field(name='Buy Speed Potion [1800$]', value='Amount: **+1**')
             embed.add_field(name=' ‎\nBuy Gold Storage [1700$]', value='Amount: **+1 lvl**')
             embed.add_field(name='\u200b', value='\u200b')
             embed.add_field(name=' ‎\nBuy Elixir Storage [1700$]', value='Amount: **+1 lvl**')
