@@ -16,9 +16,9 @@ class Core(commands.Cog):
     async def raid(self, ctx):
         with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
             data=json.load(f); await ctx.message.delete()
-            timeLeft = data[str(ctx.message.guild.id)]["raid_timer"] - time.time()
+            timeLeft = data[str(ctx.guild.id)]["raid_timer"] - time.time()
             if timeLeft > 0:
-                await ctx.send(embed=discord.Embed(title=f'Raid Blocked ┃ {str(datetime.timedelta(seconds=int(timeLeft)))}', description=f"{ctx.author.mention} would you like to use a **Speed Potion? [1/{data[str(ctx.message.guild.id)]['speed_potions']}]**", color=65535),
+                await ctx.send(embed=discord.Embed(title=f'Raid Blocked ┃ {str(datetime.timedelta(seconds=int(timeLeft)))}', description=f"{ctx.author.mention} would you like to use a **Speed Potion? [1/{data[str(ctx.guild.id)]['speed_potions']}]**", color=65535),
                     components=[
                     [Button(style=ButtonStyle.green, label="Yes", custom_id="raid_speed_pot"),
                     Button(style=ButtonStyle.red, label="No", custom_id="cancel")]])
@@ -37,15 +37,15 @@ class Core(commands.Cog):
         with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
             data=json.load(f); await ctx.message.delete()
             embed=discord.Embed(title='Select an item to purchase', color=65535)
-            embed.add_field(name=f'Buy a Builder [{5000 * data[str(ctx.message.guild.id)]["builders"]}$]', value='Amount: **+1**')
+            embed.add_field(name=f'Buy a Builder [{5000 * data[str(ctx.guild.id)]["builders"]} 🟡]', value='Amount: **+1**')
             embed.add_field(name='\u200b', value='\u200b')
-            embed.add_field(name='Buy Speed Potion [1800$]', value='Amount: **+1**')
-            embed.add_field(name=' ‎\nBuy Gold Storage [1700$]', value='Amount: **+1 lvl**')
+            embed.add_field(name='Buy Speed Potion [1800 🟡]', value='Amount: **+1**')
+            embed.add_field(name=' ‎\nBuy Gold Storage [1600 🟣]', value='Amount: **+1 lvl**')
             embed.add_field(name='\u200b', value='\u200b')
-            embed.add_field(name=' ‎\nBuy Elixir Storage [1700$]', value='Amount: **+1 lvl**')
-            embed.add_field(name=' ‎\nBuy Defenses [1300$]', value='Amount: **+1 lvl**')
+            embed.add_field(name=' ‎\nBuy Elixir Storage [1600 🟡]', value='Amount: **+1 lvl**')
+            embed.add_field(name=' ‎\nBuy Defenses [1300 🟣]', value='Amount: **+1 lvl**')
             embed.add_field(name='\u200b', value='\u200b')
-            embed.add_field(name=' ‎\nBuy Army Troops [1300$]', value='Amount: **+1 lvl**')
+            embed.add_field(name=' ‎\nBuy Army Troops [1300 🟣]', value='Amount: **+1 lvl**')
             await ctx.send(
             embed=embed,
             components=[
@@ -63,12 +63,12 @@ class Core(commands.Cog):
     async def upgrade(self, ctx):
         with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
             data=json.load(f); await ctx.message.delete()
-            timeLeft = int(data[str(ctx.message.guild.id)]["up_timer"]) - time.time()
-            upgrade = data[str(ctx.message.guild.id)]["up_name"]
+            timeLeft = int(data[str(ctx.guild.id)]["up_timer"]) - time.time()
+            upgrade = data[str(ctx.guild.id)]["up_name"]
 
             if timeLeft > 0:
-                if data[str(ctx.message.guild.id)]["speed_potions"] > 0:
-                    await ctx.send(embed=discord.Embed(title=f'{upgrade} Upgrade in Progress ┃ {str(datetime.timedelta(seconds=int(timeLeft)))}', description=f"{ctx.author.mention} would you like to use a **Speed Potion? [1/{data[str(ctx.message.guild.id)]['speed_potions']}]**", color=65535),
+                if data[str(ctx.guild.id)]["speed_potions"] > 0:
+                    await ctx.send(embed=discord.Embed(title=f'{upgrade} Upgrade in Progress ┃ {str(datetime.timedelta(seconds=int(timeLeft)))}', description=f"{ctx.author.mention} would you like to use a **Speed Potion? [1/{data[str(ctx.guild.id)]['speed_potions']}]**", color=65535),
                     components=[
                     [Button(style=ButtonStyle.green, label="Yes", custom_id="up_speed_pot"),
                     Button(style=ButtonStyle.red, label="No", custom_id="cancel")]])
@@ -90,14 +90,14 @@ class Core(commands.Cog):
     async def bank(self, ctx):
         with open(os.path.dirname(__file__) + f'\\..\\json\\data.json', 'r+') as f:
             data=json.load(f); await ctx.message.delete()
-            embed=discord.Embed(title=f"{ctx.message.guild.name}'s Bank", color=16776992)
-            embed.add_field(name='Gold', value=f'Amount: **{data[str(ctx.message.guild.id)]["gold storage"]}**\nLevel: **{data[str(ctx.message.guild.id)]["gold lvl"]}**')
+            embed=discord.Embed(title=f"{ctx.guild.name}'s Bank", color=16776992)
+            embed.add_field(name='Gold', value=f'Amount: **{data[str(ctx.guild.id)]["gold storage"]}**\nLevel: **{data[str(ctx.guild.id)]["gold lvl"]}**')
             embed.add_field(name='\u200b', value='\u200b')
-            embed.add_field(name='Elixir', value=f'Amount: **{data[str(ctx.message.guild.id)]["elixir storage"]}**\nLevel: **{data[str(ctx.message.guild.id)]["elixir lvl"]}**')
-            embed.add_field(name='‏‏‎ ‎\nArmy', value=f'Level: **{data[str(ctx.message.guild.id)]["army"]}**')
+            embed.add_field(name='Elixir', value=f'Amount: **{data[str(ctx.guild.id)]["elixir storage"]}**\nLevel: **{data[str(ctx.guild.id)]["elixir lvl"]}**')
+            embed.add_field(name='‏‏‎ ‎\nArmy', value=f'Level: **{data[str(ctx.guild.id)]["army"]}**')
             embed.add_field(name='\u200b', value='\u200b')
-            embed.add_field(name='‏‏‎ ‎\nDefenses', value=f'Level: **{data[str(ctx.message.guild.id)]["defense"]}**')
-            embed.add_field(name='‏‏‎ ‎\nBuilders', value=f'Amount: **{data[str(ctx.message.guild.id)]["builders"]}**')
+            embed.add_field(name='‏‏‎ ‎\nDefenses', value=f'Level: **{data[str(ctx.guild.id)]["defense"]}**')
+            embed.add_field(name='‏‏‎ ‎\nBuilders', value=f'Amount: **{data[str(ctx.guild.id)]["builders"]}**')
             await ctx.send(embed=embed)
 
 
