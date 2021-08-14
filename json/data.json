@@ -6,11 +6,11 @@
         "up_name": "Army",
         "raid_timer": 0,
         "raid_channel_id": 874369847239266414,
-        "elixir storage": 10000,
+        "elixir storage": 8700,
         "elixir lvl": 1,
         "gold storage": 10000,
         "gold lvl": 1,
         "army": 1,
-        "defense": 1
+        "defense": 2
     }
 }

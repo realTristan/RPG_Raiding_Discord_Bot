@@ -98,6 +98,7 @@ class Core(commands.Cog):
             embed.add_field(name='\u200b', value='\u200b')
             embed.add_field(name='‏‏‎ ‎\nDefenses', value=f'Level: **{data[str(ctx.guild.id)]["defense"]}**')
             embed.add_field(name='‏‏‎ ‎\nBuilders', value=f'Amount: **{data[str(ctx.guild.id)]["builders"]}**')
+            embed.add_field(name='‏‏‎ ‎\nPotions', value=f'Life: **None**\nSpeed: **{data[str(ctx.guild.id)]["speed_potions"]}**')
             await ctx.send(embed=embed)
 
 
