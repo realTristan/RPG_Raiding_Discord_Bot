@@ -23,8 +23,7 @@ class Core(commands.Cog):
                     [Button(style=ButtonStyle.green, label="Yes", custom_id="raid_speed_pot"),
                     Button(style=ButtonStyle.red, label="No", custom_id="cancel")]])
             else:
-                await ctx.send(
-                embed=discord.Embed(title="Are you sure?", description=f'**Lord {ctx.author.mention}**, are you sure you want to start a raid?', color=16777215),
+                await ctx.send(embed=discord.Embed(title="Are you sure?", description=f'**Lord {ctx.author.mention}**, are you sure you want to start a raid?', color=16777215),
                 components=[
                 [Button(style=ButtonStyle.green, label="Start", custom_id="start_raid"),
                 Button(style=ButtonStyle.red, label="Cancel", custom_id="cancel")]])
@@ -46,9 +45,7 @@ class Core(commands.Cog):
             embed.add_field(name=' ‎\nBuy Defenses [1300 🟣]', value='Amount: **+1 lvl**')
             embed.add_field(name='\u200b', value='\u200b')
             embed.add_field(name=' ‎\nBuy Army Troops [1300 🟣]', value='Amount: **+1 lvl**')
-            await ctx.send(
-            embed=embed,
-            components=[
+            await ctx.send(embed=embed,components=[
             [Button(style=ButtonStyle.blue, label="Builder", custom_id="buy_builder"),
             Button(style=ButtonStyle.blue, label="Speed Potion", custom_id="buy_speed_pot"),
             Button(style=ButtonStyle.blue, label="Gold Storage", custom_id="buy_gold_up")],
@@ -72,7 +69,6 @@ class Core(commands.Cog):
                     components=[
                     [Button(style=ButtonStyle.green, label="Yes", custom_id="up_speed_pot"),
                     Button(style=ButtonStyle.red, label="No", custom_id="cancel")]])
-                    
                 else:
                     await ctx.send(embed=discord.Embed(title=f'{upgrade} Upgrade in Progress ┃ {str(datetime.timedelta(seconds=int(timeLeft)))}', color=65535))
             else:
