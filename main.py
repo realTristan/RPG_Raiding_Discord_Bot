@@ -44,4 +44,4 @@ for filename in os.listdir(os.path.join(os.path.dirname(os.path.abspath(__file__
 
 
 
-client.run('ODU5NTI0NzI3MTI1OTY2ODY4.YNt8yA.lOwKwaCsCW3uEvsGclmVZt4YdCU')
+client.run('YOUR TOKEN')
